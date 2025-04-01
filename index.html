@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jdoudna</title>
     <style>
-         body {
+   body {
             font-family: 'Arial', sans-serif;
             text-align: center;
             background-color: #f3e9dc;
@@ -30,7 +30,8 @@
             border-radius: 8px;
             background-color: #fff7f0;
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
@@ -38,17 +39,20 @@
             margin: 0;
             font-size: 1.1rem;
             color: #6b4226;
+            transition: color 0.3s ease;
         }
 
         .menu-item p {
             margin: 5px 0;
             color: #333;
             font-size: 1rem;
+            transition: color 0.3s ease;
         }
 
         .menu-item.show {
             display: block;
             opacity: 1;
+            transform: translateY(0);
         }
 
         .filter-btn {
@@ -60,12 +64,13 @@
             border: none;
             border-radius: 8px;
             font-size: 1rem;
-            transition: background 0.3s ease, transform 0.2s;
+            transition: background 0.3s ease, transform 0.2s, box-shadow 0.3s ease;
         }
 
         .filter-btn:hover {
             background: #a0522d;
             transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .filter-btn:focus {
@@ -74,15 +79,31 @@
 
         img {
             margin: 20px 0;
-            width: 200px;
+            width: 300px;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-
+            animation: scaleUp 0.5s ease-in-out;
         }
 
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeInItems {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
     </style>
@@ -304,7 +325,7 @@
      </div>
 
      <div class="menu-item مأكولات">
-        <h3>مورق عنب</h3>
+        <h3>ورق عنب</h3>
         <p>$5</p>
      </div>
 
@@ -357,7 +378,7 @@
         <h3>بطاطا مقلية</h3>
        <p>$2.8</p>
      </div>
-     
+
 
 </div>
 
