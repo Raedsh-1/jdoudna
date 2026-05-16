@@ -1,441 +1,474 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jdoudna</title>
-    <style>
-   body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            background-color: #f3e9dc;
-            margin: 0;
-            padding: 20px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جدودنا</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .menu-container {
-            max-width: 600px;
-            margin: 30px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease-out;
-        }
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: #1a0f08;
+    min-height: 100vh;
+    color: #ffffff;
+    overflow-x: hidden;
+    direction: rtl;
+  }
 
-        .menu-item {
-            display: none;
-            margin: 15px 0;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #fff7f0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+  .stars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
 
-        .menu-item h3 {
-            margin: 0;
-            font-size: 1.1rem;
-            color: #6b4226;
-            transition: color 0.3s ease;
-        }
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(245, 237, 227, 0.4);
+    border-radius: 50%;
+    animation: twinkle var(--dur, 3s) infinite alternate;
+  }
 
-        .menu-item p {
-            margin: 5px 0;
-            color: #333;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-        }
+  @keyframes twinkle {
+    from { opacity: 0.1; }
+    to { opacity: 0.7; }
+  }
 
-        .menu-item.show {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+  }
 
-        .filter-btn {
-            margin: 5px;
-            padding: 12px 18px;
-            cursor: pointer;
-            background: #6b4226;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: background 0.3s ease, transform 0.2s, box-shadow 0.3s ease;
-        }
+  .hero {
+    text-align: center;
+    padding: 50px 20px 30px;
+    animation: heroIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
 
-        .filter-btn:hover {
-            background: #a0522d;
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-        .filter-btn:focus {
-            outline: none;
-        }
+  .logo-ring {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    position: relative;
+  }
 
-        img {
-            margin: 20px 0;
-            width: 300px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            animation: scaleUp 0.5s ease-in-out;
-        }
+  .ring-svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    animation: spin 18s linear infinite;
+  }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 
-        @keyframes scaleUp {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
+  .logo-img-wrap {
+    position: absolute;
+    inset: 14px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #c89060;
+    background: linear-gradient(135deg, #6b4226, #a0522d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 900;
+    color: #ffffff;
+  }
 
-        @keyframes fadeInItems {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  .logo-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
-    </style>
+  h1.brand {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #e8c89a;
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+
+  .gold-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c89060, transparent);
+    margin: 16px auto;
+  }
+
+  .tagline {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: #c8a97a;
+    font-weight: 400;
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 0 0 28px;
+    animation: fadeUp 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .filter-btn {
+    padding: 10px 20px;
+    border-radius: 100px;
+    border: 2px solid #8b5e3c;
+    background: #3d1f0d;
+    color: #f0d0a0;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .filter-btn:hover {
+    border-color: #e8c89a;
+    background: #5a2e10;
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .filter-btn.active {
+    background: #c89060;
+    border-color: #e8c89a;
+    color: #1a0f08;
+    font-weight: 900;
+    box-shadow: 0 4px 18px rgba(200, 144, 96, 0.5);
+    transform: translateY(-2px);
+  }
+
+  .count-badge {
+    font-size: 11px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 100px;
+    padding: 1px 7px;
+    margin-right: 4px;
+    font-weight: 600;
+  }
+
+  .category-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .category-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e8c89a;
+    letter-spacing: 2px;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+  }
+
+  .menu-card {
+    background: #2a1208;
+    border: 1.5px solid #5a3018;
+    border-radius: 13px;
+    padding: 15px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .menu-card:hover {
+    border-color: #c89060;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(107, 66, 38, 0.4);
+    background: #331508;
+  }
+
+  .menu-card.visible {
+    animation: cardIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .dot-accent {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #c89060;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(200, 144, 96, 0.6);
+  }
+
+  .card-info { flex: 1; }
+
+  .card-info h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.3;
+  }
+
+  .card-info .cat-tag {
+    font-size: 12px;
+    color: #c8a070;
+    font-weight: 400;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .divider {
+    width: 1px;
+    height: 30px;
+    background: #5a3018;
+    flex-shrink: 0;
+  }
+
+  .card-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: #e8c89a;
+    white-space: nowrap;
+    direction: ltr;
+    text-align: left;
+  }
+
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 24px 20px 0;
+    border-top: 1px solid #3a1a08;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: #c8a070;
+    letter-spacing: 4px;
+    margin-bottom: 14px;
+    font-weight: 400;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    padding: 8px 22px;
+    border-radius: 100px;
+    border: 2px solid #6b4226;
+    color: #e8c89a;
+    background: #2a1208;
+    text-decoration: none;
+    font-size: 13px;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .social-link:hover {
+    background: #5a2e10;
+    border-color: #c89060;
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+</style>
 </head>
 <body>
 
+<div class="stars" id="stars"></div>
 
+<div class="content">
+  <div class="hero">
+    <div class="logo-ring">
+      <svg class="ring-svg" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="75" cy="75" r="71" stroke="url(#goldRing)" stroke-width="1.5" stroke-dasharray="9 5"/>
+        <circle cx="75" cy="4" r="3" fill="#c89060"/>
+        <circle cx="75" cy="146" r="3" fill="#c89060"/>
+        <circle cx="4" cy="75" r="3" fill="#c89060"/>
+        <circle cx="146" cy="75" r="3" fill="#c89060"/>
+        <defs>
+          <linearGradient id="goldRing" x1="0" y1="0" x2="150" y2="150">
+            <stop offset="0%" stop-color="#e8c89a"/>
+            <stop offset="40%" stop-color="#6b4226"/>
+            <stop offset="100%" stop-color="#e8c89a"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="logo-img-wrap" id="logoWrap">
+        <img src="jdoudna.JPG" alt="جدودنا" id="logoImg">
+      </div>
+    </div>
+    <h1 class="brand">جدودنا</h1>
+    <div class="gold-line"></div>
+    <p class="tagline">قائمة الطعام والمشروبات</p>
+  </div>
 
-<img src="jdoudna.JPG" alt="Cafe image" width="300">
+  <div class="filters" id="filters"></div>
 
-<div>
+  <div class="category-header" id="catHeader" style="display:none">
+    <h2 id="catTitle"></h2>
+    <div class="gold-line" style="margin-top:10px"></div>
+  </div>
 
-  <script>//<button class="filter-btn" onclick="filterMenu('حلويات')">حلويات</button></script>  
-  
+  <div class="menu-grid" id="menuGrid"></div>
 
-     <button class="filter-btn" onclick="filterMenu('اركيلة')">اركيلة</button>
-
-    <button class="filter-btn" onclick="filterMenu('مشروباتـساخنة')">مشروبات ساخنة</button>
-
-
-    <button class="filter-btn" onclick="filterMenu('مشروباتـباردة')">مشروبات باردة</button>
-    <button class="filter-btn" onclick="filterMenu('خدمات')">خدمات</button>
-    <script>// <button class="filter-btn" onclick="filterMenu('نقراشات')">نقراشات</button> </script>
-    
-    <button class="filter-btn" onclick="filterMenu('ساندويتشات')">ساندويشات</button> 
-    <button class="filter-btn" onclick="filterMenu('مأكولات')">مأكولات</button> 
-
-
-    <button class="filter-btn" onclick="filterMenu('الكل')">الكل</button>
+  <footer>
+    <p>تابعونا على</p>
+    <div class="social-links">
+      <a class="social-link" href="https://www.instagram.com/Jdoudna__" target="_blank">Instagram</a>
+      <a class="social-link" href="https://www.tiktok.com/@jdoudna.restaurant" target="_blank">TikTok</a>
+      <a class="social-link" href="https://www.facebook.com/jdoudnarestaurant" target="_blank">Facebook</a>
+    </div>
+  </footer>
 </div>
-
-<div class="menu-container">
-    
-    <script>// mashrobat sa5ena </script>
-    <div class="menu-item مشروباتـساخنة">
-        <h3>ركوة قهوة</h3>
-        <p>ل.ل450,000</p>
-    </div>
-    <div class="menu-item مشروباتـساخنة">
-        <h3>نسكافيه</h3>
-        <p>ل.ل200,000</p>
-    </div>
-    <div class="menu-item مشروبات_ساخنة">
-        <h3>كابوتشينو</h3>
-        <p>ل.ل200,000</p>
-    </div>
-    <div class="menu-item مشروباتـساخنة">
-        <h3>ابريق شاي</h3>
-        <p>ل.ل550,000</p>
-    </div>
-     <div class="menu-item مشروباتـساخنة">
-        <h3>شاي</h3>
-        <p>ل.ل150,000</p>
-    </div>
-
-      <div class="menu-item مشروباتـساخنة">
-        <h3>هوت تشوكوليت</h3>
-        <p>ل.ل300,000</p>
-    </div>
-
-      <div class="menu-item مشروباتـساخنة">
-        <h3>شاي اخضر</h3>
-        <p>ل.ل200,000</p>
-    </div>
-
-
-<script>// mashrobat bareda </script>  
-
-     <div class="menu-item مشروباتـباردة">
-        <h3>مشروبات غازية </h3>
-        <p>ل.ل100,000</p>
-    </div>
-
-    <div class="menu-item مشروباتـباردة">
-        <h3>مياه غازية</h3>
-        <p>ل.ل200,000</p>
-    </div>
-    <div class="menu-item مشروباتـباردة">
-        <h3>مياه معدنية </h3>
-        <p>ل.ل150,000</p>
-    </div>
-    <div class="menu-item مشروباتـباردة">
-        <h3>مياه معدنية صغير</h3>
-        <p>ل.ل50,000</p>
-    </div>
-    <div class="menu-item مشروباتـباردة">
-        <h3>مشروب طاقة</h3>
-        <p>ل.ل150,000</p>
-    </div>
-     <div class="menu-item مشروباتـباردة">
-        <h3>عصير معلب</h3>
-        <p>ل.ل100,000</p>
-    </div>
-
-   
-      <div class="menu-item مشروباتـباردة">
-        <h3>بيرة بدون كحول</h3>
-        <p>ل.ل200,000</p>
-    </div>
-
-    <div class="menu-item مشروباتـباردة">
-        <h3>فرييز</h3>
-        <p>ل.ل200,000</p>
-    </div>
-
-
-
-<script>//argeele</script>
-<div class="menu-item اركيلة">
-        <h3>تفاحتين</h3>
-        <p>ل.ل500,000</p>
-    </div>
-
-<div class="menu-item اركيلة">
-        <h3>حامض و نعنع</h3>
-        <p>ل.ل500,000</p>
-    </div>
-
-
-<div class="menu-item اركيلة">
-        <h3>عنب و نعنع</h3>
-        <p>ل.ل500,000</p>
-    </div>
-
-
-
-
-
-
-
-
-
-
-  <script> 
-  /* <div class="menu-item نقراشات">
-        <h3>Chocolate Croissant</h3>
-        <p>$2.50</p>
-    </div>
-    <div class="menu-item نقراشات">
-        <h3>Blueberry Muffin</h3>
-        <p>$2.00</p>
-    </div>
-    <div class="menu-item حلويات">
-        <h3>Cheesecake</h3>
-        <p>$4.00</p>
-    </div>
-    <div class="menu-item حلويات">
-        <h3>Brownie</h3>
-        <p>$3.00</p>
-    </div>
-    <div class="menu-item ساندويتشات">
-        <h3>Club Sandwich</h3>
-        <p>$5.50</p>
-    </div>
-    <div class="menu-item ساندويتشات">
-        <h3>Grilled Cheese</h3>
-        <p>$4.00</p>
-    </div>
-
-    <div class="menu-item خدمات">
-        <h3>منقل فحم للأركيلة </h3>
-        <p>$2.3</p>
-
-    </div>
-    */
-    </script>
-
-<script>//5adamat</script>
-
-    <div class="menu-item خدمات">
-        <h3>منقل فحم للشوي </h3>
-        <p>ل.ل600,000</p>
-    </div>
-
-    <div class="menu-item خدمات">
-        <h3>منقل فحم للأركيلة </h3>
-        <p>ل.ل200,000</p>
-    </div>
-
-    <div class="menu-item خدمات">
-        <h3>خدمة غاز</h3>
-        <p>ل.ل150,000</p>
-    </div>
-
-
-
-     <div class="menu-item خدمات">
-        <h3>خدمة قلي</h3>
-        <p>ل.ل300,000</p>
-     </div>
-
-     <div class="menu-item خدمات">
-        <h3>خدمة شوي</h3>
-        <p>ل.ل300,000/كجم</p>
-     </div>
-
-
-
-
-<script>//ma2kolat</script>
-
-      <div class="menu-item مأكولات">
-        <h3>تبولة</h3>
-        <p>ل.ل500,000</p>
-     </div>
-
-
-      <div class="menu-item مأكولات">
-        <h3>فتوش</h3>
-        <p>ل.ل500,000</p>
-     </div> 
-
-     <div class="menu-item مأكولات">
-        <h3>سلطة موسمية</h3>
-        <p>ل.ل500,000</p>
-     </div>
-
-      <div class="menu-item مأكولات">
-        <h3>حمص بالطحينة</h3>
-        <p>ل.ل400,000</p>
-     </div>
-
-      <div class="menu-item مأكولات">
-        <h3>متبل باذنجان</h3>
-        <p>ل.ل400,000</p>
-     </div>
-
-     
-     <div class="menu-item مأكولات">
-        <h3>كبة مقلية</h3>
-        <p>ل.ل500,000</p>
-     </div>
-
-     <div class="menu-item مأكولات">
-        <h3>رقائق جبنة</h3>
-        <p>ل.ل500,000</p>
-     </div>
-     <div class="menu-item مأكولات">
-        <h3>ورق عنب</h3>
-        <p>ل.ل500,000</p>
-     </div>
-
-
-     <div class="menu-item مأكولات">
-        <h3>بطاطا مقلية صغير</h3>
-        <p>ل.ل400,000</p>
-     </div>
-
-     <div class="menu-item مأكولات">
-        <h3>بطاطا مقلية كبير</h3>
-        <p>ل.ل500,000</p>
-     </div>
-
-
-
-<div class="menu-item مأكولات">
-        <h3>مشاوي مشكل (كيلو)</h3>
-        <p>ل.ل2,800,000</p>
-     </div> 
-<div class="menu-item مأكولات">
-        <h3>مشاوي مشكل غنم (كيلو)</h3>
-        <p>ل.ل3,500,000</p>
-     </div> 
-<div class="menu-item مأكولات">
-        <h3>وجبة مشاوي</h3>
-        <p>ل.ل1,100,000</p>
-     </div> 
-
-
-<script>//sadwishat</script>
-
-      <div class="menu-item ساندويتشات">
-        <h3>ساندويش طاووق </h3>
-        <p>ل.ل500,000</p>
-     </div>
-
-       <div class="menu-item ساندويتشات">
-        <h3>ساندويش لحمة</h3>
-        <p>ل.ل500,000</p>
-     </div>
-
-       <div class="menu-item ساندويتشات">
-        <h3>ساندويش كفتة</h3>
-        <p>ل.ل500,000</p>
-     </div>
-
-
- <div class="menu-item ساندويتشات">
-        <h3> ساندويش بطاطا مقلية </h3>
-        <p>ل.ل250,000</p>
-     </div>
-
-
-</div>
-
-<footer style="
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #6b4226;
-    color: white;
-    border-radius: 15px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-">
-    <span>Follow Us:</span>
-    <a href="https://www.instagram.com/Jdoudna__" target="_blank" style="color: #e1306c; text-decoration: none; font-weight: bold;">Instagram</a>
-    <span>|</span>
-    <a href="https://www.tiktok.com/@jdoudna.restaurant" target="_blank" style="color: #69C9D0; text-decoration: none; font-weight: bold;">TikTok</a>
-    <span>|</span>
-    <a href="https://www.facebook.com/jdoudnarestaurant" target="_blank" style="color: #3b5998; text-decoration: none; font-weight: bold;">Facebook</a>
-</footer>
-
 
 <script>
-    function filterMenu(category) {
-        let items = document.querySelectorAll('.menu-item');
-        items.forEach(item => {
-            if (category === 'الكل' || item.classList.contains(category)) {
-                item.classList.add('show');
-            } else {
-                item.classList.remove('show');
-            }
-        });
-    }
-    filterMenu('الكل'); // Show all items initially
-</script>
+  const menuData = [
+    { name: 'ركوة قهوة', price: 'ل.ل 450,000', cat: 'مشروبات ساخنة' },
+    { name: 'نسكافيه', price: 'ل.ل 200,000', cat: 'مشروبات ساخنة' },
+    { name: 'كابوتشينو', price: 'ل.ل 200,000', cat: 'مشروبات ساخنة' },
+    { name: 'ابريق شاي', price: 'ل.ل 550,000', cat: 'مشروبات ساخنة' },
+    { name: 'شاي', price: 'ل.ل 150,000', cat: 'مشروبات ساخنة' },
+    { name: 'هوت تشوكوليت', price: 'ل.ل 300,000', cat: 'مشروبات ساخنة' },
+    { name: 'شاي أخضر', price: 'ل.ل 200,000', cat: 'مشروبات ساخنة' },
+    { name: 'مشروبات غازية', price: 'ل.ل 100,000', cat: 'مشروبات باردة' },
+    { name: 'مياه غازية', price: 'ل.ل 200,000', cat: 'مشروبات باردة' },
+    { name: 'مياه معدنية', price: 'ل.ل 150,000', cat: 'مشروبات باردة' },
+    { name: 'مياه معدنية صغير', price: 'ل.ل 50,000', cat: 'مشروبات باردة' },
+    { name: 'مشروب طاقة', price: 'ل.ل 150,000', cat: 'مشروبات باردة' },
+    { name: 'عصير معلب', price: 'ل.ل 100,000', cat: 'مشروبات باردة' },
+    { name: 'بيرة بدون كحول', price: 'ل.ل 200,000', cat: 'مشروبات باردة' },
+    { name: 'فرييز', price: 'ل.ل 200,000', cat: 'مشروبات باردة' },
+    { name: 'تفاحتين', price: 'ل.ل 500,000', cat: 'أركيلة' },
+    { name: 'حامض و نعنع', price: 'ل.ل 500,000', cat: 'أركيلة' },
+    { name: 'عنب و نعنع', price: 'ل.ل 500,000', cat: 'أركيلة' },
+    { name: 'منقل فحم للشوي', price: 'ل.ل 600,000', cat: 'خدمات' },
+    { name: 'منقل فحم للأركيلة', price: 'ل.ل 200,000', cat: 'خدمات' },
+    { name: 'خدمة غاز', price: 'ل.ل 150,000', cat: 'خدمات' },
+    { name: 'خدمة قلي', price: 'ل.ل 300,000', cat: 'خدمات' },
+    { name: 'خدمة شوي', price: 'ل.ل 300,000/كجم', cat: 'خدمات' },
+    { name: 'تبولة', price: 'ل.ل 500,000', cat: 'مأكولات' },
+    { name: 'فتوش', price: 'ل.ل 500,000', cat: 'مأكولات' },
+    { name: 'سلطة موسمية', price: 'ل.ل 500,000', cat: 'مأكولات' },
+    { name: 'حمص بالطحينة', price: 'ل.ل 400,000', cat: 'مأكولات' },
+    { name: 'متبل باذنجان', price: 'ل.ل 400,000', cat: 'مأكولات' },
+    { name: 'كبة مقلية', price: 'ل.ل 500,000', cat: 'مأكولات' },
+    { name: 'رقائق جبنة', price: 'ل.ل 500,000', cat: 'مأكولات' },
+    { name: 'ورق عنب', price: 'ل.ل 500,000', cat: 'مأكولات' },
+    { name: 'بطاطا مقلية صغير', price: 'ل.ل 400,000', cat: 'مأكولات' },
+    { name: 'بطاطا مقلية كبير', price: 'ل.ل 500,000', cat: 'مأكولات' },
+    { name: 'مشاوي مشكل (كيلو)', price: 'ل.ل 2,800,000', cat: 'مأكولات' },
+    { name: 'مشاوي مشكل غنم (كيلو)', price: 'ل.ل 3,500,000', cat: 'مأكولات' },
+    { name: 'وجبة مشاوي', price: 'ل.ل 1,100,000', cat: 'مأكولات' },
+    { name: 'ساندويش طاووق', price: 'ل.ل 500,000', cat: 'ساندويشات' },
+    { name: 'ساندويش لحمة', price: 'ل.ل 500,000', cat: 'ساندويشات' },
+    { name: 'ساندويش كفتة', price: 'ل.ل 500,000', cat: 'ساندويشات' },
+    { name: 'ساندويش بطاطا مقلية', price: 'ل.ل 250,000', cat: 'ساندويشات' },
+  ];
 
+  const categories = ['الكل', 'مشروبات ساخنة', 'مشروبات باردة', 'أركيلة', 'مأكولات', 'ساندويشات', 'خدمات'];
+  let active = 'الكل';
+
+  // Logo fallback
+  const logoImg = document.getElementById('logoImg');
+  const logoWrap = document.getElementById('logoWrap');
+  logoImg.onerror = () => {
+    logoImg.style.display = 'none';
+    logoWrap.innerHTML = 'ج';
+  };
+
+  // Stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${2+Math.random()*4}s;animation-delay:${Math.random()*5}s`;
+    starsEl.appendChild(s);
+  }
+
+  // Filter buttons
+  const filtersEl = document.getElementById('filters');
+  categories.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (cat === active ? ' active' : '');
+    const count = cat === 'الكل' ? menuData.length : menuData.filter(i => i.cat === cat).length;
+    btn.innerHTML = `${cat} <span class="count-badge">${count}</span>`;
+    btn.onclick = () => filterMenu(cat);
+    filtersEl.appendChild(btn);
+  });
+
+  function filterMenu(cat) {
+    active = cat;
+    document.querySelectorAll('.filter-btn').forEach((b, i) => {
+      b.classList.toggle('active', categories[i] === cat);
+    });
+    const header = document.getElementById('catHeader');
+    const title = document.getElementById('catTitle');
+    if (cat !== 'الكل') {
+      header.style.display = 'block';
+      title.textContent = cat;
+    } else {
+      header.style.display = 'none';
+    }
+    const list = cat === 'الكل' ? menuData : menuData.filter(i => i.cat === cat);
+    const grid = document.getElementById('menuGrid');
+    grid.innerHTML = '';
+    list.forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'menu-card';
+      card.innerHTML = `
+        <div class="dot-accent"></div>
+        <div class="card-info">
+          <h3>${item.name}</h3>
+          ${cat === 'الكل' ? `<span class="cat-tag">${item.cat}</span>` : ''}
+        </div>
+        <div class="divider"></div>
+        <div class="card-price">${item.price}</div>
+      `;
+      grid.appendChild(card);
+      setTimeout(() => {
+        card.classList.add('visible');
+        card.style.animationDelay = `${idx * 30}ms`;
+      }, 10);
+    });
+  }
+
+  filterMenu('الكل');
+</script>
 </body>
 </html>
